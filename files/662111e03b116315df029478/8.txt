@@ -1,0 +1,44 @@
+domains
+  point = point(integer, integer)
+  slist = point*
+
+predicates
+  nondeterm solve(slist, slist)
+  nondeterm move(point, point)
+  nondeterm member(point, slist)
+  nondeterm length(slist, integer)
+
+clauses
+  solve(Visited, Solution):-
+    length(Visited, 64), !, 
+    Solution = Visited,
+    write("Found a solution. Do you want to search for another one? (Press any key): "), 
+    readChar(N), 
+    solve([], _).
+
+  solve([Last|Other], Solution):-
+    move(Last, To),
+    not(member(To, Other)),
+    solve([To, Last|Other], Solution).
+
+  move(point(X, Y), point(ToX, ToY)):-
+    X >= 2, Y >= 3, ToX = X - 1, ToY = Y - 2;
+    X >= 2, Y <= 6, ToX = X - 1, ToY = Y + 2;
+    X <= 7, Y >= 3, ToX = X + 1, ToY = Y - 2;
+    X <= 7, Y <= 6, ToX = X + 1, ToY = Y + 2;
+    X >= 3, Y >= 2, ToX = X - 2, ToY = Y - 1;
+    X >= 3, Y <= 7, ToX = X - 2, ToY = Y + 1;
+    X <= 6, Y >= 2, ToX = X + 2, ToY = Y - 1;
+    X <= 6, Y <= 7, ToX = X + 2, ToY = Y + 1.
+  
+  member(X, [X|_]). 
+  member(X, [_|Ys]):- 
+    member(X, Ys). 
+    
+  length([], 0).
+  length([_|T], L):-
+    length(T, TailLength),
+    L = TailLength + 1.
+
+goal
+  solve([point(3, 3)], Solution).

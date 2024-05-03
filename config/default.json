@@ -1,0 +1,7 @@
+{
+  "serverPort": 5000,
+  "dbUrl": "mongodb+srv://nechaev:pQHkWbX59pXYvp3D@cloud.yao8zka.mongodb.net/cloud?retryWrites=true&w=majority",
+  "secretKey": "mySecretKeyNowForMyDiplom",
+  "filePath": "C:\\Users\\Nechaev\\WebstormProjects\\cloud\\server\\files",
+  "staticPath": "C:\\Users\\Nechaev\\WebstormProjects\\cloud\\server\\static"
+}
