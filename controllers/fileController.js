@@ -342,7 +342,7 @@ class FileController {
             user.usedSpace = user.usedSpace + file.size
             console.log('при загрузке ' + user.usedSpace)
             const avatarName = Uuid.v4() + ".jpg"
-            file.mv(req.staticPath + "\\" + avatarName)
+            file.mv(req.staticPath + "/" + avatarName)
             user.avatar = avatarName
             await user.save()
             const token = generateJwtToken(user.id, user.email, user.diskSpace, user.usedSpace, user.role, user.avatar, user.name, user.surname)
@@ -357,7 +357,7 @@ class FileController {
     async deleteAvatar(req, res, next) {
         try {
             const user = await User.findById(req.user.id)
-            const avatarPath = req.staticPath + "\\" + user.avatar
+            const avatarPath = req.staticPath + "/" + user.avatar
 
             const stats = await fs.promises.stat(avatarPath)
             const sizeInBytes = stats.size
