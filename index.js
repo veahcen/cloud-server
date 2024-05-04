@@ -22,7 +22,7 @@ app.use(fileUpload({
     defParamCharset: 'utf8'
 }))
 app.use(express.json())
-app.use(express.static('static'))
+app.use(express.static(path.resolve(__dirname, 'static')))
 app.use('/api', router)
 
 // Обработка ошибок в конце, последний мидлвеир, next не нужет
