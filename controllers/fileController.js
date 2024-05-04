@@ -108,7 +108,7 @@ class FileController {
                 file.path = name
                 await fileService.createDir(req, file)
             } else {
-                file.path = `${parentFile.path}\\${file.name}`
+                file.path = `${parentFile.path}/${file.name}`
                 await fileService.createDir(req, file)
                 parentFile.childs.push(file._id)
                 await parentFile.save()
@@ -161,11 +161,11 @@ class FileController {
 
             let path;
             if (parent) {
-                path = `${req.filePath}\\${user._id}\\${parent.path}\\${file.name}`
+                path = `${req.filePath}/${user._id}/${parent.path}/${file.name}`
                 await updateParentFolderSize(parent._id, file.size)
                 await parent.save()
             } else {
-                path = `${req.filePath}\\${user._id}\\${file.name}`
+                path = `${req.filePath}/${user._id}/${file.name}`
             }
 
             if (fs.existsSync(path)) {
@@ -176,7 +176,7 @@ class FileController {
             const type = file.name.split('.').pop()
             let filePath = file.name
             if (parent) {
-                filePath = parent.path + "\\" + file.name
+                filePath = parent.path + "/" + file.name
             }
 
             const dbFile = new File({

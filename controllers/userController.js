@@ -87,7 +87,7 @@ class UserController {
         }
 
         // Находим главную папку пользователя
-        const mainFolderPath = `${config.get('filePath')}\\${user._id}`
+        const mainFolderPath = `${req.filePath}/${user._id}`
 
         if (!mainFolderPath) {
             return next(ApiError.notFound('Главная папка пользователя не найдена'))
