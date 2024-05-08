@@ -88,7 +88,7 @@ async function addFolderToArchive(folderPath, archive, parentFolder = '') {
 
 function isAllowedFileType(filename) {
     // Список разрешенных расширений файлов
-    const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'pdf', 'txt', 'mp4', 'webm'];
+    const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'pdf', 'txt', 'webm'];
 
     // Получаем расширение файла
     const extension = filename.split('.').pop().toLowerCase();
