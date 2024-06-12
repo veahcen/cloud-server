@@ -71,6 +71,18 @@ class UserController {
         return res.json({token})
     }
 
+    async accessUser(req, res, next) {
+        const {email} = req.body
+        const user = await User.findOne({email})
+
+        if (!user) {
+            return next(ApiError.notFound('Пользователь не найден'))
+        }
+
+        const token = generateJwtToken(user.id, user.email, user.diskSpace, user.usedSpace, user.role, user.avatar, user.name, user.surname)
+        return res.json({token})
+    }
+
     async deleteUser(req, res, next) {
         const {email} = req.body;
 
